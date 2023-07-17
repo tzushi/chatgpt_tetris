@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>Tetris Game</title>
         <style>
             body {
@@ -22,10 +24,34 @@
     text-align: center;
     color: #fff;
 }
+
+@media (max-width: 600px) {
+    #tetris {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+    }
+    
+    #controls {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    #controls button {
+        width: 20%;
+    }
+}
+
         </style>
     </head>
     <body>
-    <h1>ChatGPTに作ってもらったテトリス</h1>
+<p align="center">
+    <strong>ChatGPTに作ってもらったテトリス</strong>
+<!--
 <div id="instructions">
     <p>操作方法:</p>
     <ul>
@@ -36,9 +62,22 @@
         <li>W: 右に回転</li>
     </ul>
 </div>
+-->
+
+<div id="controls">
+    <button id="move-left">←</button>
+    <button id="move-right">→</button>
+    <button id="move-down">↓</button>
+    <button id="rotate-left">左回転</button>
+    <button id="rotate-right">右回転</button>
+</div>
     
 <div id="score"></div>
-        <canvas id="tetris" width="240" height="400"></canvas>
+<canvas id="tetris" width="240" height="400"></canvas>
+
+</p>
+
+
         <script>
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
@@ -274,6 +313,22 @@ document.addEventListener('keydown', event => {
     } else if (event.keyCode === 87) {
         playerRotate(1);
     }
+});
+
+document.getElementById('move-left').addEventListener('click', () => {
+    playerMove(-1);
+});
+document.getElementById('move-right').addEventListener('click', () => {
+    playerMove(1);
+});
+document.getElementById('move-down').addEventListener('click', () => {
+    playerDrop();
+});
+document.getElementById('rotate-left').addEventListener('click', () => {
+    playerRotate(-1);
+});
+document.getElementById('rotate-right').addEventListener('click', () => {
+    playerRotate(1);
 });
 
 playerReset();
